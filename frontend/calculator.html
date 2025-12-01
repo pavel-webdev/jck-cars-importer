@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Калькулятор импорта — JCK</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <style>
+    .calc-card img.flag { width:40px; height:28px; object-fit:cover; border-radius:6px; border:1px solid rgba(255,255,255,0.2); }
+
+.calc-total {
+    background: linear-gradient(135deg, #cc74ff, #cfd3fd) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    margin: 10px 0 !important;
+}
+  </style>
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator" id="calcLink">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+
+  <main class="container">
+    <div class="page-title-strip">
+      <div class="card">
+        <strong>Калькулятор импорта</strong>
+        <div class="small-muted">Расчет стоимости автомобиля с учетом всех расходов</div>
+      </div>
+    </div>
+
+    <div class="calc-choose">
+      <div id="chooseJapan" class="calc-card" role="button" aria-pressed="false">
+        <img class="flag" src="assets/icons/Flag_of_Japan.svg" alt="Japan Flag" onerror="this.style.display='none'">
+        <div>
+          <div style="font-weight:700; color: var(--accent);">Калькулятор — Япония</div>
+          <div class="small-muted">Ввод в JPY (¥)</div>
+        </div>
+      </div>
+
+      <div id="chooseChina" class="calc-card" role="button" aria-pressed="false">
+        <img class="flag" src="assets/icons/Flag_of_the_People's_Republic_of_China.svg" alt="China Flag" onerror="this.style.display='none'">
+        <div>
+          <div style="font-weight:700; color: var(--accent-2);">Калькулятор — Китай</div>
+          <div class="small-muted">Ввод в CNY (元)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-container" id="calcArea" aria-hidden="true">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px">
+        <div>
+          <div class="kicker" id="calcTitle">—</div>
+          <h3 id="calcH" style="color: var(--accent-3); margin:0;">Калькулятор</h3>
+        </div>
+      </div>
+
+      <form id="calcForm" class="calc-form" autocomplete="off" onsubmit="return false;">
+        <label>Аукционная стоимость (в валюте страны)
+          <input id="inputPrice" class="input" type="number" step="0.01" required>
+        </label>
+
+        <label>Год выпуска
+          <input id="inputYear" class="input" type="number" placeholder="2018" required>
+        </label>
+
+        <label>Объем ДВС (куб.см)
+          <input id="inputEngine" class="input" type="number" step="1" placeholder="0" required>
+        </label>
+
+        <label>Мощность двигателя (л.с.)
+          <input id="inputHorsepower" class="input" type="number" step="1" placeholder="150" required>
+        </label>
+
+        <div class="full" style="display:flex;gap:12px;justify-content:flex-end">
+          <button id="btnCalculate" class="cta" type="button">Рассчитать</button>
+          <button id="btnReset" class="btn" type="button">Сбросить</button>
+        </div>
+      </form>
+
+      <div id="resultBlock" style="margin-top:30px;display:none">
+        <h4 style="color: var(--accent-3); margin-bottom:20px;">Детализация расчёта</h4>
+        <table class="result-table" id="resultTable" aria-live="polite"></table>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px">
+          <div class="small-muted"></div>
+          <div id="totalWrap"><strong id="totalText">Итого: —</strong></div>
+        </div>
+      </div>
+
+      <p class="calc-note">
+        В расчёте указана стоимость авто с минимальной комиссией. Комиссия на авто из Китая 4% от полной стоимости авто на момент покупки при стоимости авто до 4 000 000 рублей. Свыше — 5%.
+      </p>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/calc.js"></script>
+  <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    
+
+    setTimeout(function() {
+
+        const calcLink = document.getElementById('calcLink');
+        console.log('Calc link found:', calcLink);
+        
+        if (calcLink) {
+
+            document.querySelectorAll('.nav a').forEach(function(link) {
+                link.classList.remove('active');
+                console.log('Removed active from:', link.textContent);
+            });
+            
+
+            calcLink.classList.add('active');
+
+            
+
+            console.log('Calc link classes:', calcLink.className);
+        } 
+    }, 300);
+});
+
+
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const calcLink = document.getElementById('calcLink');
+        if (calcLink && !calcLink.classList.contains('active')) {
+            document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
+            calcLink.classList.add('active');
+        }
+    }, 500);
+});
+</script>
+</body>
+</html>

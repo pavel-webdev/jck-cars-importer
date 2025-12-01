@@ -1,0 +1,28 @@
+RewriteEngine On
+
+# Убираем .html расширение
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# Редирект со старых URL на новые
+RewriteCond %{THE_REQUEST} \s/+(.*?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+
+RewriteRule ^index$ / [R=301,L]
+RewriteRule ^index\.html$ / [R=301,L]
+
+
+RewriteRule ^catalog$ catalog.html [NC,L]
+
+
+RewriteRule ^calculator$ calculator.html [NC,L]
+
+
+RewriteRule ^about$ about.html [NC,L]
+
+
+RewriteRule ^auth$ auth.html [NC,L]
+
+RewriteRule ^dashboard$ dashboard.html [NC,L]

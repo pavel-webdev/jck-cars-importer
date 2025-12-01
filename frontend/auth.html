@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Вход/Регистрация — JCK</title>
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container auth-center">
+    <div class="card" style="max-width:480px;width:100%;padding:40px;">
+      <div class="tabs">
+        <button id="tabLogin" class="active">Вход</button>
+        <button id="tabRegister">Регистрация</button>
+      </div>
+
+      <form id="loginForm">
+        <input class="input" name="email" type="email" placeholder="E-mail" required style="margin-bottom:16px">
+        <input class="input" name="pass" type="password" placeholder="Пароль" required style="margin-bottom:16px">
+        <button class="cta" type="submit" style="width:100%">Войти</button>
+      </form>
+
+      <form id="registerForm" class="hidden">
+        <input class="input" name="name" type="text" placeholder="Имя" required style="margin-bottom:16px">
+        <input class="input" name="email" type="email" placeholder="E-mail" required style="margin-bottom:16px">
+        <input class="input" name="pass" type="password" placeholder="Пароль" required style="margin-bottom:16px">
+        <button class="cta" type="submit" style="width:100%">Зарегистрироваться</button>
+      </form>
+        <form id="verifyForm" class="hidden">
+      <div style="text-align: center; margin-bottom: 20px;">
+          <h4 style="color: var(--accent); margin-bottom: 8px;">Подтверждение email</h4>
+          <p class="small-muted" id="verifyEmailText">Код отправлен на email</p>
+      </div>
+      <input class="input" name="code" type="text" placeholder="Введите 6-значный код" maxlength="6" required style="margin-bottom:16px; text-align: center; font-size: 18px; letter-spacing: 8px;">
+      <input type="hidden" name="email" id="verifyEmail">
+      <input type="hidden" name="password" id="verifyPassword">
+      <button class="cta" type="submit" style="width:100%">Подтвердить</button>
+      <button type="button" class="btn" onclick="resendCode()" style="width:100%; margin-top:8px;">Отправить код повторно</button>
+  </form>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script>
+ const tabLogin = document.getElementById('tabLogin');
+const tabRegister = document.getElementById('tabRegister');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+const verifyForm = document.getElementById('verifyForm');
+
+// Переключение табов
+tabLogin.onclick = ()=>{
+    tabLogin.classList.add('active');
+    tabRegister.classList.remove('active');
+    loginForm.classList.remove('hidden');
+    registerForm.classList.add('hidden');
+    verifyForm.classList.add('hidden');
+};
+
+tabRegister.onclick = ()=>{
+    tabRegister.classList.add('active');
+    tabLogin.classList.remove('active');
+    registerForm.classList.remove('hidden');
+    loginForm.classList.add('hidden');
+    verifyForm.classList.add('hidden');
+};
+
+// РЕГИСТРАЦИЯ с подтверждением email
+registerForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const formData = new FormData(registerForm);
+    const submitBtn = registerForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Отправка кода...';
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch('send_verification.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            // Показываем форму подтверждения
+            document.getElementById('verifyEmail').value = registerForm.email.value;
+            document.getElementById('verifyPassword').value = registerForm.pass.value;
+            document.getElementById('verifyEmailText').textContent = `Код отправлен на ${registerForm.email.value}. Проверьте СПАМ.`;
+            
+            registerForm.classList.add('hidden');
+            verifyForm.classList.remove('hidden');
+        } else {
+            alert(result.message);
+        }
+    } catch(error) {
+        alert('Ошибка соединения с сервером');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// ПОДТВЕРЖДЕНИЕ КОДА
+verifyForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const formData = new FormData(verifyForm);
+    const submitBtn = verifyForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Проверка...';
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch('verify_email.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            localStorage.setItem('jck_user', JSON.stringify(result.user));
+            alert('Регистрация завершена!');
+            location.href = '/dashboard';
+        } else {
+            alert(result.message);
+        }
+    } catch(error) {
+        alert('Ошибка соединения с сервером');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// ПОВТОРНАЯ ОТПРАВКА КОДА
+function resendCode() {
+    const email = document.getElementById('verifyEmail').value;
+    const name = registerForm.name.value;
+    const submitBtn = document.querySelector('#verifyForm button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Отправка...';
+    submitBtn.disabled = true;
+    
+    fetch('send_verification.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ email, name })
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert(result.message);
+    })
+    .catch(error => {
+        alert('Ошибка соединения');
+    })
+    .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+}
+
+// ВХОД через PHP
+loginForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Вход...';
+    submitBtn.disabled = true;
+    
+    try {
+        const response = await fetch('login.php', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        
+        if (result.success) {
+            localStorage.setItem('jck_user', JSON.stringify(result.user));
+            location.href = '/dashboard';
+        } else {
+            alert(result.message);
+        }
+    } catch(error) {
+        alert('Ошибка соединения с сервером');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>

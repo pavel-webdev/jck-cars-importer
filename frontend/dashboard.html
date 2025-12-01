@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Кабинет — JCK</title>
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title-strip">
+      <div class="card">
+        <strong>Личный кабинет</strong>
+        <div class="small-muted">Управление вашим профилем и избранным</div>
+      </div>
+    </div>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 30px;">
+      <div class="card">
+        <h3 style="color: var(--accent); margin-bottom:20px;">Профиль</h3>
+        <p style="margin-bottom:12px;">Имя: <strong id="profileName" style="color: var(--accent-3);">—</strong></p>
+        <p style="margin-bottom:20px;">E-mail: <strong id="profileEmail" style="color: var(--accent-3);">—</strong></p>
+        <button class="cta" id="logoutBtn" style="width:100%">Выйти</button>
+      </div>
+
+      <div class="card">
+        <h3 style="color: var(--accent-2); margin-bottom:20px;">Избранное</h3>
+        <ul id="favList" style="list-style:none; padding:0;"></ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const loginBtn = document.getElementById('loginBtn');
+      const currentUser = JSON.parse(localStorage.getItem('jck_user') || 'null');
+      
+      if(loginBtn){
+        if(currentUser){
+          loginBtn.textContent = 'Профиль';
+          loginBtn.href = '/dashboard';
+        } else {
+          loginBtn.textContent = 'Вход';
+          loginBtn.href = '/auth';
+        }
+      }
+
+      if(!currentUser) {
+        setTimeout(()=>{ location.href = '/auth'; }, 10);
+        return;
+      }
+
+      document.getElementById('profileName').textContent = currentUser.name || '—';
+      document.getElementById('profileEmail').textContent = currentUser.email || '—';
+
+      document.getElementById('logoutBtn').onclick = ()=>{
+        localStorage.removeItem('jck_user');
+        if(loginBtn){
+          loginBtn.textContent = 'Вход';
+          loginBtn.href = '/auth';
+        }
+        location.href = '/';
+      };
+
+      const favs = JSON.parse(localStorage.getItem('jck_favs')||'[]');
+      const favList = document.getElementById('favList');
+      if(favs.length) {
+        favList.innerHTML = favs.map(f=>`<li style="padding:12px; background:var(--glass); border-radius:8px; margin-bottom:8px;">${f}</li>`).join('');
+      } else {
+        favList.innerHTML = '<li class="small-muted" style="padding:12px; text-align:center;">Пока пусто</li>';
+      }
+    });
+  </script>
+</body>
+</html>

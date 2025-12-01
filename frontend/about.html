@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>О компании — JCK</title>
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title-strip">
+      <div class="card">
+        <strong>О компании JCK</strong>
+        <div class="small-muted">Поставки автомобилей из Японии, Китая и Кореи</div>
+      </div>
+    </div>
+    
+    <section class="card">
+      <h2 style="color: var(--accent); margin-bottom:20px;">Кто мы</h2>
+      <p class="small-muted" style="font-size:16px; line-height:1.6;">JCK — международная команда профессионалов, занимающаяся подбором, проверкой и доставкой автомобилей с аукционов Японии, Китая и Кореи. Мы сопровождаем покупку на всех этапах — от торгов до получения в порту.</p>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px">
+        <div style="height:200px;background:var(--glass);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.1)">
+          <span class="small-muted">Фото команды</span>
+        </div>
+        <div style="height:200px;background:var(--glass);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.1)">
+          <span class="small-muted">Наш офис</span>
+        </div>
+        <div style="height:200px;background:var(--glass);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.1)">
+          <span class="small-muted">Склад авто</span>
+        </div>
+        <div style="height:200px;background:var(--glass);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,0.1)">
+          <span class="small-muted">Доставка</span>
+        </div>
+      </div>
+    </section>
+    
+    <section style="margin-top:30px" class="card appear">
+      <h3 style="color: var(--accent-2); margin-bottom:20px;">FAQ</h3>
+      
+      <details>
+        <summary>Как долго доставка?</summary>
+        <p class="small-muted">Обычно 6–10 недель от момента покупки.</p>
+      </details>
+      
+      <details>
+        <summary>Какие документы нужны?</summary>
+        <p class="small-muted">Счёт, договор, таможенные документы — мы помогаем собрать полный пакет.</p>
+      </details>
+      
+      <details>
+        <summary>Есть ли гарантия на авто?</summary>
+        <p class="small-muted">Предоставляем полный отчет о состоянии автомобиля перед покупкой.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

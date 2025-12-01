@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JCKCars</title>
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="panel appear" style="grid-column: 1 / -1;">
+        <h1>JCK — Доверяйте импорт профессионалам</h1>
+        <p>Поставки автомобилей из Японии, Китая и Кореи. Полная проверка, прозрачные расчёты и сопровождение сделки.</p>
+        
+        <div class="hero-cta">
+          <a class="cta" href="/catalog">Посмотреть каталог</a>
+        </div>
+      </div>
+      <div class="hero-grid" style="grid-column: 1 / -1; gap: 24px; margin-top: 20px;">
+        <div class="action-card calculator appear">
+          <div class="action-card-header">
+            <div class="action-card-icon calculator">
+              <img src="assets/icons/poisk.png" alt="Калькулятор" style="width: 30px; height: 30px;">
+            </div>
+            <h3 class="action-card-title">Быстрый подбор</h3>
+          </div>
+          <p class="action-card-description">Оставьте заявку — мы подберём авто по вашим параметрам и бюджету.</p>
+          <div class="action-card-footer">
+            <a href="/calculator" class="action-card-btn">
+              Рассчитать стоимость
+            </a>
+          </div>
+        </div>
+
+        <div class="action-card telegram appear">
+          <div class="action-card-header">
+            <div class="action-card-icon telegram">
+              <img src="assets/icons/telegram_5968804.png" alt="Telegram" style="width: 30px; height: 30px;">
+            </div>
+            <h3 class="action-card-title">Мы в Telegram</h3>
+          </div>
+          <p class="action-card-description">Следите за свежими поступлениями, акциями и специальными предложениями в нашем Telegram-канале.</p>
+          <div class="action-card-footer">
+            <a href="https://t.me/JCKCars" target="_blank" class="action-card-btn telegram-btn">
+              Подписаться на канал
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card appear">
+      <h3 style="color: var(--accent); margin-bottom: 20px;">Популярные авто</h3>
+      <div class="carousel-container">
+        <button class="carousel-btn carousel-prev" onclick="carouselPrev()">‹</button>
+        <button class="carousel-btn carousel-next" onclick="carouselNext()">›</button>
+        
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="popularTrack">
+            <!-- Авто загружаются через JS -->
+          </div>
+        </div>
+        
+        <div class="carousel-indicators" id="carouselIndicators">
+          <!-- Индикаторы через JS -->
+        </div>
+      </div>
+    </section>
+
+    <section class="help-section appear">
+    <div class="help-card">
+        <h2>Не знаешь, с чего начать?</h2>
+        <p>Наш менеджер поможет подобрать лучший вариант автомобиля, рассчитать доставку и ответит на любые вопросы. Оставь свои контакты — и мы свяжемся с тобой в ближайшее время!</p>
+
+        <form class="help-form" id="helpForm">
+            <input type="text" name="name" class="input" placeholder="Ваше имя" required
+                   pattern="[A-Za-zА-Яа-яЁё\s\-]{2,50}"
+                   title="Только буквы, пробелы и дефисы (от 2 до 50 символов)">
+            
+            <input type="email" name="email" class="input" placeholder="E-mail" required
+                   title="Введите корректный email адрес">
+            
+            <input type="tel" name="phone" class="input" placeholder="Телефон" required
+                   pattern="[\d\s\-\+\(\)]{10,20}"
+                   title="Введите номер телефона (от 10 до 15 цифр)">
+            
+            <!-- Скрытое поле для защиты от ботов -->
+            <input type="text" name="website" class="hidden-field" tabindex="-1" autocomplete="off">
+            
+            <button type="submit" class="cta">Отправить заявку</button>
+        </form>
+    </div>
+</section>
+
+    <section class="card appear" style="margin-top:40px">
+      <h3 style="color: var(--accent-2); margin-bottom: 20px;">Отзывы клиентов</h3>
+      <div class="grid">
+        <div class="card">
+          <h4 style="color: var(--accent-3); margin-bottom: 8px;">«Отличный сервис и быстрая доставка»</h4>
+          <p class="small-muted">— Алексей</p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-3); margin-bottom: 8px;">«Полная поддержка и прозрачность»</h4>
+          <p class="small-muted">— Мария</p>
+        </div>
+        <div class="card">
+          <h4 style="color: var(--accent-3); margin-bottom: 8px;">«Помогли с документами и растаможкой»</h4>
+          <p class="small-muted">— Сергей</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+
+  <div id="modalDetail" class="modal">
+    <div class="panel">
+      <button class="btn" onclick="closeModal()" style="position: absolute; top: 20px; right: 20px;">✕</button>
+      <h3 class="panel-title" style="color: var(--accent); margin-bottom: 20px;"></h3>
+      <div class="panel-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

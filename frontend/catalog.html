@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Каталог — JCK</title>
+  <link rel="icon" href="assets/icons/hammer_16752872.png" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="container header">
+    <div class="brand">
+      <a href="/" class="logo-link">
+        <img src="assets/icons/logo.png" alt="JCK" class="logo">
+      </a>
+      <div class="titles">
+        <div class="main">JCK</div>
+        <div class="sub">Japan · China · Korea</div>
+      </div>
+    </div>
+    
+    <nav class="nav">
+      <a href="/">Главная</a>
+      <a href="/catalog">Каталог</a>
+      <a href="/calculator">Калькулятор</a>
+      <a href="/about">О компании</a>
+    </nav>
+    
+    <div class="header-right">
+      <div id="currencyWidget" class="currency-widget">—</div>
+      <a id="loginBtn" class="cta" href="/auth">Вход</a>
+    </div>
+
+    <div class="menu">
+      <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+      <label for="burger-checkbox" class="burger"></label>
+      <ul class="menu-list">
+        <div class="mobile-menu-brand">
+          <img src="assets/icons/logo.png" alt="JCK">
+          <div class="main">JCK</div>
+        </div>
+        <li><a href="/" class="menu-item">Главная</a></li>
+        <li><a href="/catalog" class="menu-item">Каталог</a></li>
+        <li><a href="/calculator" class="menu-item">Калькулятор</a></li>
+        <li><a href="/about" class="menu-item">О компании</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-title-strip">
+      <div class="card">
+        <strong>Каталог автомобилей</strong>
+        <div class="small-muted">Фильтры по стране, марке, модели, году и цене</div>
+      </div>
+    </div>
+    
+    <div style="display:flex;gap:24px;align-items:flex-start">
+      <aside style="width:320px;flex-shrink:0">
+        <div class="card">
+          <h4 style="color: var(--accent); margin-bottom:20px;">Фильтры</h4>
+          <label>Страна
+            <select id="filterCountry" class="input">
+              <option value="">Все</option>
+              <option value="Japan">Япония</option>
+              <option value="China">Китай</option>
+              <option value="Korea">Корея</option>
+            </select>
+          </label>
+          
+          <label style="margin-top:16px;">Марка
+            <select id="filterBrand" class="input">
+              <option value=''>Все марки</option>
+            </select>
+          </label>
+          
+          <label style="margin-top:16px;">Модель
+            <select id="filterModel" class="input">
+              <option value=''>Все модели</option>
+            </select>
+          </label>
+          
+          <div style="display:flex;gap:12px;margin-top:16px">
+            <input id="filterFrom" class="input" placeholder="Год от">
+            <input id="filterTo" class="input" placeholder="Год до">
+          </div>
+          
+          <div style="display:flex;gap:12px;margin-top:12px">
+            <input id="filterMin" class="input" placeholder="Цена от">
+            <input id="filterMax" class="input" placeholder="Цена до">
+          </div>
+          
+          <select id="sortBy" class="input" style="margin-top:16px">
+            <option value=''>Сортировка</option>
+            <option value='price-asc'>Цена ↑</option>
+            <option value='price-desc'>Цена ↓</option>
+          </select>
+          
+          <div style="margin-top:16px">
+            <input id="search" class="input" placeholder="Поиск по названию">
+          </div>
+          
+            <div style="margin-top:20px; display:flex; gap:12px;">
+              <button class="cta" onclick="applyFilters()" style="flex:1">Применить фильтры</button>
+              <button class="btn" onclick="resetFilters()" style="flex:1">Сбросить</button>
+            </div>
+        </div>
+      </aside>
+      
+      <section style="flex:1">
+        <div id="carList" class="grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="container footer">
+    <div>© 2025 JCK — Автоаукцион из Японии, Китая и Кореи</div>
+    <div class="small-muted">manager@jckcars.ru</div>
+  </footer>
+  
+  <div id="modalDetail" class="modal">
+    <div class="panel">
+      <button class="btn" onclick="closeModal()" style="position: absolute; top: 20px; right: 20px;">✕</button>
+      <h3 class="panel-title" style="color: var(--accent); margin-bottom: 20px;"></h3>
+      <div class="panel-body"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/money.js/0.2.0/money.min.js"></script>
+  <script src="assets/js/currency.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
