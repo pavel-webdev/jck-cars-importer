@@ -226,11 +226,11 @@ function calculateImportCost(price, year, engineCC, horsepower) {
 4. Регулярное резервное копирование базы данных
 
 ## 📞 Контакты и поддержка
-Разработчик: Романенко Павел
-Telegram: @imitiryu
-Email: asidyoutube@mail.ru
-GitHub: https://github.com/pavel-webdev
-Kwork: https://kwork.ru/user/pavelgit_webdev
+1 Разработчик: Романенко Павел
+2 Telegram: @imitiryu
+3 Email: asidyoutube@mail.ru
+4 GitHub: https://github.com/pavel-webdev
+5 Kwork: https://kwork.ru/user/pavelgit_webdev
 
 ## 💼 Коммерческие предложения
 1. Готов к сотрудничеству на проектах:
