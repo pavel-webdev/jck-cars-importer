@@ -84,11 +84,9 @@
 *Детальный расчет стоимости с учетом всех расходов*
 
 ### Telegram бот
-![Telegram бот](screenshots/telegram-bot.png)
 *Управление контентом через команды в Telegram*
 
 ### Мобильная версия
-![Мобильная версия](screenshots/mobile-view.png)
 *Полностью адаптивный дизайн для смартфонов*
 
 ---
@@ -103,7 +101,7 @@
 ### Установка
 1. Клонируйте репозиторий:
 
-git clone https://github.com/ваш-логин/jck-cars-importer.git
+git clone https://github.com/pavel-webdev/jck-cars-importer.git
 
 2. Настройте базу данных:
 
