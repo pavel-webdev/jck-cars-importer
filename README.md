@@ -137,7 +137,6 @@ jck-cars-importer/
 │   ├── js/                  # JavaScript файлы
 │   └── images/              # Изображения
 ├── backend/                 # PHP файлы
-│   ├── api/                 # API эндпоинты
 │   ├── config.php           # Пример конфигурации
 │   └── *.php                # Бизнес-логика
 └── docs/                    # Документация
