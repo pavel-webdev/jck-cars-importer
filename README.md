@@ -238,3 +238,5 @@ function calculateImportCost(price, year, engineCC, horsepower) {
 3. Интеграция Telegram ботов
 4. Создание калькуляторов и систем расчетов
 5. Full Stack разработка под ключ
+
+## ⭐ Если проект был полезен, поставь звезду на GitHub
