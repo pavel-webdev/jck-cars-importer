@@ -228,7 +228,7 @@ function calculateImportCost(price, year, engineCC, horsepower) {
 ## 📞 Контакты и поддержка
 1. Разработчик: Романенко Павел
 2. Telegram: @imitiryu
-3. Email: asidyoutube@mail.ru
+3. Email: pavel.r.contact@mail.ru
 4. GitHub: https://github.com/pavel-webdev
 5. Kwork: https://kwork.ru/user/pavelgit_webdev
 
